@@ -2,7 +2,6 @@ import SectionTitile from "../../components/sectionTitle/SectionTitile";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { Rating } from "@smastrom/react-rating";
-
 import "@smastrom/react-rating/style.css";
 
 // Import Swiper styles
@@ -13,7 +12,7 @@ import { useEffect, useState } from "react";
 const Testimonials = () => {
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
-    fetch("reviews.json")
+    fetch("http://localhost:5000/reviews")
       .then((res) => res.json())
       .then((data) => {
         setReviews(data);

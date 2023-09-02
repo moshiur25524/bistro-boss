@@ -10,6 +10,7 @@ import MenuCategory from "../Shared/MenuCategory";
 
 const Menu = () => {
   const [menu] = useMenu();
+
   const desserts = menu.filter((item) => item.category === "dessert");
   const pizza = menu.filter((item) => item.category === "pizza");
   const soup = menu.filter((item) => item.category === "soup");
@@ -24,7 +25,7 @@ const Menu = () => {
       <Cover img={menuImg} title={"our menu"} />
       {/* Offered Category */}
       <MenuCategory items={offered} />
-      <MenuCategory items={desserts} title={"desserts"} coverImg={dessertImg} />
+      <MenuCategory items={desserts} title={"dessert"} coverImg={dessertImg} />
       <MenuCategory items={pizza} title={"pizza"} coverImg={pizzaImg} />
       <MenuCategory items={salad} title={"salad"} coverImg={saladImg} />
       <MenuCategory items={soup} title={"soup"} coverImg={soupImg} />

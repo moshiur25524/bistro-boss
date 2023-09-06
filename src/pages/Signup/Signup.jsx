@@ -1,12 +1,13 @@
 import { useContext } from "react";
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 
 const Signup = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+  const navigate = useNavigate();
   const {
     register,
     reset,
@@ -19,17 +20,25 @@ const Signup = () => {
     console.log(data);
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
+      updateUserProfile(data.name, data.PhotoURL)
+        .then(console.log("usser is updated"))
+        .catch((error) => console.log(error));
       console.log(loggedUser);
+      if (loggedUser) {
+        Swal.fire({
+          title: "Sign up Successfully",
+          showClass: {
+            popup: "animate__animated animate__fadeInDown",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutUp",
+          },
+        });
+        logOut();
+        navigate("/login");
+      }
     });
-    Swal.fire({
-      title: "Sign up Successfully",
-      showClass: {
-        popup: "animate__animated animate__fadeInDown",
-      },
-      hideClass: {
-        popup: "animate__animated animate__fadeOutUp",
-      },
-    });
+
     reset();
   };
 
@@ -64,6 +73,21 @@ const Signup = () => {
                 />
                 {errors.name && (
                   <span className="text-red-600">Name is required</span>
+                )}
+              </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="text"
+                  // name="photo_url"
+                  {...register("PhotoURL", { required: true })}
+                  placeholder="Photo_URL"
+                  className="input input-bordered"
+                />
+                {errors.PhotoURL && (
+                  <span className="text-red-600">Photo URL is required</span>
                 )}
               </div>
               <div className="form-control">

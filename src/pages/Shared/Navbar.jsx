@@ -14,6 +14,9 @@ const Navbar = () => {
         <Link to={"/menu"}>Our Menu</Link>
       </li>
       <li>
+        <Link to={"/secret"}>Secret</Link>
+      </li>
+      <li>
         <Link to={"/order/salad"}>Order Food</Link>
       </li>
     </>
@@ -54,7 +57,10 @@ const Navbar = () => {
         <div className="navbar-end">
           {user ? (
             <>
-              <button className="btn" onClick={() => logOut()}>
+              <button className="btn btn-active btn-neutral me-5">
+                {user.displayName}
+              </button>
+              <button className="btn " onClick={() => logOut()}>
                 Logout
               </button>
             </>

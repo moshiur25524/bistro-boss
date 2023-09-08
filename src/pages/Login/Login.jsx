@@ -7,10 +7,12 @@ import {
 import { AuthContext } from "../../Providers/AuthProviders";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import { BiShow, BiHide } from "react-icons/bi";
 import Swal from "sweetalert2";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
+  const [showPassword, setShowPassword] = useState(false);
   const { signin } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,6 +22,10 @@ const Login = () => {
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -89,12 +95,22 @@ const Login = () => {
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  name="password"
-                  className="input input-bordered"
-                />
+                <div className="relative">
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="password"
+                    name="password"
+                    className="input input-bordered"
+                  />
+                  <span
+                    className="absolute"
+                    onClick={togglePasswordVisibility}
+                    style={{ cursor: "pointer", right: "40px", top: "15px" }}
+                  >
+                    {showPassword ? <BiHide /> : <BiShow />}
+                  </span>
+                </div>
+
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
@@ -119,9 +135,10 @@ const Login = () => {
                   New Here ? <Link to={"/signup"}>Create an Account</Link>
                 </small>
               </p>
+              {/* ToDo: add this if need chapcha disabled={disabled}*/}
               <div className="form-control mt-6">
                 <input
-                  disabled={disabled}
+                  disabled={false}
                   className="btn btn-primary"
                   type="submit"
                   value="Login"

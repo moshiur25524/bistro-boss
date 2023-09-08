@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import useCart from "../../hooks/useCart";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [cart] = useCart();
 
   const navOptions = (
     <>
@@ -21,10 +23,12 @@ const Navbar = () => {
         <Link to={"/order/salad"}>Order Food</Link>
       </li>
       <li>
-        <button className="btn">
-          <AiOutlineShoppingCart />
-          <div className="badge badge-secondary">+0</div>
-        </button>
+        <Link to={"/dashboard/mycart"}>
+          <button className="btn">
+            <AiOutlineShoppingCart />
+            <div className="badge badge-warning">+{cart?.length || 0} </div>
+          </button>
+        </Link>
       </li>
     </>
   );

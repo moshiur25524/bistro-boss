@@ -24,7 +24,7 @@ const Navbar = () => {
       </li>
       <li>
         <Link to={"/dashboard/mycart"}>
-          <button className="btn">
+          <button className="btn btn-sm">
             <AiOutlineShoppingCart />
             <div className="badge badge-warning">+{cart?.length || 0} </div>
           </button>

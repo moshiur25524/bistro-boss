@@ -2,6 +2,7 @@ import useCart from "../../../hooks/useCart";
 import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
@@ -31,19 +32,22 @@ const MyCart = () => {
   };
   return (
     <>
+      <Helmet>
+        <title>Bistro Boss | Cart</title>
+      </Helmet>
       <SectionTitile subHeading={"My Cart"} heading={"wanna add more?"} />
       <div className="bg-white p-5">
         <div className="flex justify-between uppercase font-semibold font-[Cinzel] mb-5">
-          <h3 className="text-3xl">Total Cart: {cart.length}</h3>
-          <h3 className="text-3xl">Total Price: $ {totalPrice}</h3>
+          <h3 className="text-3xl">Total Item: {cart.length}</h3>
+          <h3 className="text-3xl">Total Price: $ {totalPrice.toFixed(2)}</h3>
           <button className="btn btn-warning btn-sm bg-[#D1A054] border-0">
             Pay
           </button>
         </div>
         <div className="overflow-x-auto">
-          <table className="table">
+          <table className="table ">
             {/* head */}
-            <thead className="bg-[#D1A054] rounded-t-md text-white uppercase">
+            <thead className="bg-[#D1A054] rounded-[12px] text-white uppercase ">
               <tr>
                 <th>#</th>
                 <th>item image</th>
@@ -59,10 +63,7 @@ const MyCart = () => {
                   <td>
                     <div className="avatar">
                       <div className="mask mask-squircle w-12 h-12">
-                        <img
-                          src={item.image}
-                          alt="Avatar Tailwind CSS Component"
-                        />
+                        <img src={item.image} alt={item.name} />
                       </div>
                     </div>
                   </td>

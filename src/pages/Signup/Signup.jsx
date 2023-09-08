@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 
 const Signup = () => {
   const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const {
     register,
@@ -20,26 +21,41 @@ const Signup = () => {
     console.log(data);
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
-      updateUserProfile(data.name, data.PhotoURL)
-        .then(console.log("usser is updated"))
-        .catch((error) => console.log(error));
-      console.log(loggedUser);
-      if (loggedUser) {
-        Swal.fire({
-          title: "Sign up Successfully",
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
-        logOut();
-        navigate("/login");
-      }
-    });
 
-    reset();
+      updateUserProfile(data.name, data.PhotoURL)
+        .then(() => {
+          const userinfo = { name: data?.name, email: data?.email };
+
+          fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userinfo),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              if (data.insertedId) {
+                reset();
+                Swal.fire({
+                  title: "Sign up Successfully",
+                  showClass: {
+                    popup: "animate__animated animate__fadeInDown",
+                  },
+                  hideClass: {
+                    popup: "animate__animated animate__fadeOutUp",
+                  },
+                });
+              }
+            });
+          if (loggedUser) {
+            logOut();
+            navigate("/login");
+          }
+        })
+        .catch((error) => console.log(error));
+    });
   };
 
   console.log(watch("example"));
@@ -116,8 +132,8 @@ const Signup = () => {
                     required: true,
                     minLength: 6,
                     maxLength: 20,
-                    pattern:
-                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9_])/,
+                    // pattern:
+                    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9_])/,
                   })}
                   placeholder="password"
                   className="input input-bordered"
@@ -135,12 +151,12 @@ const Signup = () => {
                     Password must be less then 20 characters
                   </span>
                 )}
-                {errors.password?.type === "pattern" && (
+                {/* {errors.password?.type === "pattern" && (
                   <span className="text-red-600">
                     Password must have one uppercase, one lowercaase, one number
                     and one special character
                   </span>
-                )}
+                )} */}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?

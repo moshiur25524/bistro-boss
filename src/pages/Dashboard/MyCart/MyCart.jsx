@@ -70,14 +70,14 @@ const MyCart = () => {
 
                   <td>{item.name}</td>
                   <td>$ {item.price}</td>
-                  <th>
+                  <td>
                     <button
                       onClick={() => handleDelete(item)}
                       className="btn btn-ghost btn-md bg-red-600 text-white"
                     >
                       <FaTrash />
                     </button>
-                  </th>
+                  </td>
                 </tr>
               ))}
             </tbody>

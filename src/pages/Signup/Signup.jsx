@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Signup = () => {
   const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
@@ -176,6 +177,7 @@ const Signup = () => {
                   <Link to={"/login"}>Signin please !!</Link>
                 </small>
               </p>
+              <SocialLogin />
             </form>
           </div>
         </div>

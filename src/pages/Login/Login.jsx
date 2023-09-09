@@ -9,6 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { BiShow, BiHide } from "react-icons/bi";
 import Swal from "sweetalert2";
+import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
@@ -145,6 +146,7 @@ const Login = () => {
                 />
               </div>
             </div>
+            <SocialLogin />
           </form>
         </div>
       </div>

@@ -13,6 +13,10 @@ import {
 import { app } from "../firebase/firebase.config";
 import axios from "axios";
 
+/*
+we will signin, signup, logout user by using firbase. And we want to do it from a center component. That's why we are using Context api.
+*/
+
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
@@ -47,6 +51,13 @@ const AuthProviders = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+
+  /*
+  1. with onAuthStateChange() we can get the logged in user.
+  2. we named the logged in user as Current user.
+  3. when we got the logged in user. we created a post api using axios to send the current user to sign a jwt token.
+  4. After getting the token, we set the token in local storage and when user logout , the token will be removed from the localstorage.
+  */
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

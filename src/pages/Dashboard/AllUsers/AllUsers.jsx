@@ -5,8 +5,14 @@ import { FaTrash, FaUserShield } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const AllUsers = () => {
+  const token = localStorage.getItem("access-token");
+
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("http://localhost:5000/users");
+    const res = await fetch("http://localhost:5000/users", {
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
     return res.json();
   });
 
@@ -76,7 +82,7 @@ const AllUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
+              {users?.map((user, index) => (
                 <tr key={user._id}>
                   <th>{index + 1}</th>
                   <td>{user.name}</td>

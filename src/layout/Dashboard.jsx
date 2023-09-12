@@ -15,11 +15,21 @@ import { TfiMenuAlt } from "react-icons/tfi";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import { BiSolidContact } from "react-icons/bi";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
 
-  let isAdmin = true;
+  // TODO: get the user from backend to check admin
+  // let isAdmin = true;
+  const [isAdmin, isAdminLaoding] = useAdmin();
+
+  if (isAdminLaoding) {
+    return <p>Loading...</p>;
+  }
+
+  // Assuming isAdmin is an object with an 'admin' property
+  const isAdminAdmin = isAdmin.admin;
 
   return (
     <div className="drawer lg:drawer-open">
@@ -42,7 +52,7 @@ const Dashboard = () => {
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
         <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-base-content font-semibold">
           {/* Sidebar content here */}
-          {isAdmin ? (
+          {isAdminAdmin ? (
             <>
               <li>
                 <NavLink to={"/dashboard/home"}>

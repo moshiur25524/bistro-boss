@@ -11,6 +11,7 @@ import Dashboard from "../layout/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import NotFoundPage from "../pages/Shared/NotFoundPage";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
+import Review from "../pages/Dashboard/Review/Review";
 
 export const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ export const router = createBrowserRouter([
       {
         path: "mycart",
         element: <MyCart />,
+      },
+      {
+        path: "review",
+        element: <Review />,
       },
       {
         path: "allusers",

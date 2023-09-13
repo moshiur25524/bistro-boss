@@ -21,7 +21,7 @@ const FoodCard = ({ item }) => {
         price,
         email: user?.email,
       };
-      fetch("http://localhost:5000/carts", {
+      fetch("https://bistro-server-tau.vercel.app/carts", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(cartItem),
@@ -38,6 +38,7 @@ const FoodCard = ({ item }) => {
               timer: 1500,
             });
           }
+
           console.log(data);
         });
     } else {

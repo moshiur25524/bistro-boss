@@ -1,5 +1,5 @@
 import SectioinTitile from "../../components/sectionTitle/SectionTitile";
-import featuredImage from "../../../../assets/home/featured.jpg";
+import featuredImage from "../../assets/home/featured.jpg";
 import "./Featured.css";
 import { Link } from "react-router-dom";
 

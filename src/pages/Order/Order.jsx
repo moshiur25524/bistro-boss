@@ -1,4 +1,4 @@
-import orderImg from "../../../../assets/shop/banner2.jpg";
+import orderImg from "../../assets/shop/banner2.jpg";
 import useMenu from "../../hooks/useMenu";
 import Cover from "../Shared/Cover";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";

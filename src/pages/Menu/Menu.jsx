@@ -8,6 +8,8 @@ import saladImg from "../../assets/menu/salad-bg.jpg";
 import useMenu from "../../hooks/useMenu";
 import MenuCategory from "../Shared/MenuCategory";
 
+// taking time to deploy
+
 const Menu = () => {
   const [menu] = useMenu();
 

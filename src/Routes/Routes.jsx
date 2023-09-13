@@ -12,6 +12,7 @@ import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import NotFoundPage from "../pages/Shared/NotFoundPage";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Review from "../pages/Dashboard/Review/Review";
+import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
 
 export const router = createBrowserRouter([
   {
@@ -67,6 +68,10 @@ export const router = createBrowserRouter([
       {
         path: "allusers",
         element: <AllUsers />,
+      },
+      {
+        path: "manage-item",
+        element: <ManageItems />,
       },
     ],
   },

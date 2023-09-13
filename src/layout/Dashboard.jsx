@@ -65,7 +65,7 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to={"/dashboard/reservation"}>
+                <NavLink to={"/dashboard/manage-item"}>
                   <TfiMenuAlt /> Manage Items
                 </NavLink>
               </li>

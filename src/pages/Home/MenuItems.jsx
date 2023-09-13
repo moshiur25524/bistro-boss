@@ -1,5 +1,5 @@
 import SectionTitile from "../../components/sectionTitle/SectionTitile";
-import MenuItem from "../Shared/menuItem";
+import MenuItem from "../Shared/MenuItem";
 import useMenu from "../../hooks/useMenu";
 
 const MenuItems = () => {

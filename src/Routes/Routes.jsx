@@ -13,6 +13,9 @@ import NotFoundPage from "../pages/Shared/NotFoundPage";
 import AllUsers from "../pages/Dashboard/AllUsers/AllUsers";
 import Review from "../pages/Dashboard/Review/Review";
 import ManageItems from "../pages/Dashboard/ManageItems/ManageItems";
+import ManageBookings from "../pages/Dashboard/ManageBooking/ManageBookings";
+import AddItem from "../pages/Dashboard/AddItem/AddItem";
+import AdminHome from "../pages/Dashboard/AdminHome/AdminHome";
 
 export const router = createBrowserRouter([
   {
@@ -66,12 +69,24 @@ export const router = createBrowserRouter([
         element: <Review />,
       },
       {
+        path: "admin-home",
+        element: <AdminHome />,
+      },
+      {
         path: "allusers",
         element: <AllUsers />,
       },
       {
         path: "manage-item",
         element: <ManageItems />,
+      },
+      {
+        path: "manage-booking",
+        element: <ManageBookings />,
+      },
+      {
+        path: "add-item",
+        element: <AddItem />,
       },
     ],
   },

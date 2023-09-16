@@ -1,16 +1,14 @@
 import { Helmet } from "react-helmet-async";
 import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const AddItem = () => {
   const image_hosting_token = import.meta.env.VITE_image_upload_token;
   const image_hosting_url = `https://api.imgbb.com/1/upload?key=${image_hosting_token}`;
+  const token = localStorage.getItem("access-token");
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data) => {
     const formData = new FormData();
@@ -34,12 +32,33 @@ const AddItem = () => {
             image: img_url,
           };
           console.log(newItem);
+          fetch("http://localhost:5000/menu", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(newItem),
+          })
+            .then((res) => res.json())
+            .then((response) => {
+              console.log(response);
+              if (response.insertedId) {
+                reset();
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "An item is successfully added",
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+            });
         }
       });
     console.log(data);
   };
 
-  console.log(errors);
   return (
     <>
       <Helmet>

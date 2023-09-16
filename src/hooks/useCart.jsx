@@ -1,21 +1,26 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
+import Loading from "../pages/Shared/Loading";
 
 const useCart = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const token = localStorage.getItem("access-token");
 
   const { refetch, data: cart = [] } = useQuery({
     queryKey: ["carts", user?.email],
     queryFn: async () => {
       const res = await fetch(
-        `https://bistro-server-tau.vercel.app/carts?email=${user?.email}`,
+        `http://localhost:5000/carts?email=${user?.email}`,
         {
           headers: {
             authorization: `Bearer ${token}`,
           },
         }
       );
+
+      if (loading) {
+        return <Loading />;
+      }
       return res.json();
     },
   });

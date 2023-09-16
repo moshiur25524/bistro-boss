@@ -18,7 +18,7 @@ const SocialLogin = () => {
         email: loggedInUser?.email,
       };
       console.log(loggedInUser);
-      fetch("https://bistro-server-tau.vercel.app/users", {
+      fetch("http://localhost:5000/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

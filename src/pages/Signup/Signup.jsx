@@ -27,7 +27,7 @@ const Signup = () => {
         .then(() => {
           const userinfo = { name: data?.name, email: data?.email };
 
-          fetch("https://bistro-server-tau.vercel.app/users", {
+          fetch("http://localhost:5000/users", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -66,7 +66,7 @@ const AuthProviders = ({ children }) => {
 
       if (currentUser) {
         axios
-          .post("https://bistro-server-tau.vercel.app/jwt", {
+          .post("http://localhost:5000/jwt", {
             email: currentUser.email,
           })
           .then((data) => {

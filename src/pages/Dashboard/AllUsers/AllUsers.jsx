@@ -8,7 +8,7 @@ const AllUsers = () => {
   const token = localStorage.getItem("access-token");
 
   const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await fetch("https://bistro-server-tau.vercel.app/users", {
+    const res = await fetch("http://localhost:5000/users", {
       headers: {
         authorization: `Bearer ${token}`,
       },
@@ -18,7 +18,7 @@ const AllUsers = () => {
 
   // Make Admin
   const handleMakeAdmin = (user) => {
-    fetch(`https://bistro-server-tau.vercel.app/users/admin/${user._id}`, {
+    fetch(`http://localhost:5000/users/admin/${user._id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -48,7 +48,7 @@ const AllUsers = () => {
       confirmButtonText: " delete!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://bistro-server-tau.vercel.app/users/${user._id}`, {
+        fetch(`http://localhost:5000/users/${user._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

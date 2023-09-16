@@ -13,10 +13,10 @@ import { IoMdMenu } from "react-icons/io";
 import { MdReviews } from "react-icons/md";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { NavLink, Outlet } from "react-router-dom";
-import loadingImage from "../assets/others/loader3.gif";
 import useCart from "../hooks/useCart";
 import { BiSolidContact } from "react-icons/bi";
 import useAdmin from "../hooks/useAdmin";
+import Loading from "../pages/Shared/Loading";
 
 const Dashboard = () => {
   const [cart] = useCart();
@@ -26,15 +26,7 @@ const Dashboard = () => {
   const [isAdmin, isAdminLaoding] = useAdmin();
 
   if (isAdminLaoding) {
-    return (
-      <div className="hero min-h-screen ">
-        <div className="hero-content text-center">
-          <div className="max-w-md">
-            <img src={loadingImage} alt="" />
-          </div>
-        </div>
-      </div>
-    );
+    return <Loading />;
   }
 
   // Assuming isAdmin is an object with an 'admin' property

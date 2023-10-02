@@ -8,6 +8,7 @@ import {
   FaUtensils,
   FaBook,
   FaUsers,
+  FaHamburger,
 } from "react-icons/fa";
 import { IoMdMenu } from "react-icons/io";
 import { MdReviews } from "react-icons/md";
@@ -39,13 +40,13 @@ const Dashboard = () => {
         style={{ backgroundColor: "#F6F6F6" }}
         className="drawer-content p-5"
       >
-        <Outlet />
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className="btn btn-gray-900 drawer-button lg:hidden"
         >
-          Open drawer
+          <FaHamburger />
         </label>
+        <Outlet />
       </div>
 
       <div className="drawer-side">

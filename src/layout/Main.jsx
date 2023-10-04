@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import Footer from "../pages/Shared/Footer";
 import Navbar from "../pages/Shared/Navbar";
+import ScrollUpButton from "../components/ScrollUpButton/ScrollUpButton";
 
 const Main = () => {
   const location = useLocation();
@@ -12,6 +13,8 @@ const Main = () => {
     <div className="max-w-screen-xl mx-auto">
       {NoHeaderFooter || <Navbar />}
       <Outlet></Outlet>
+      <ScrollUpButton />
+
       {NoHeaderFooter || <Footer />}
     </div>
   );

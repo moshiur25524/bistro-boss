@@ -70,18 +70,14 @@ export const router = createBrowserRouter([
         path: "review",
         element: <Review />,
       },
+      {
+        path: "payment",
+        element: <Payment />,
+      },
       // admin routes
       {
         path: "admin-home",
         element: <AdminHome />,
-      },
-      {
-        path: "payment",
-        element: (
-          <AdminRoutes>
-            <Payment />
-          </AdminRoutes>
-        ),
       },
       {
         path: "allusers",

@@ -31,7 +31,7 @@ const Dashboard = () => {
   }
 
   // Assuming isAdmin is an object with an 'admin' property
-  const isAdminAdmin = isAdmin.admin;
+  const isAdminAdmin = isAdmin?.admin;
 
   return (
     <div className="drawer lg:drawer-open">

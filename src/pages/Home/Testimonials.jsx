@@ -18,6 +18,10 @@ const Testimonials = () => {
         setReviews(data);
       });
   }, []);
+
+  if (!reviews) {
+    return <p>Loading...</p>;
+  }
   return (
     <div>
       <section>

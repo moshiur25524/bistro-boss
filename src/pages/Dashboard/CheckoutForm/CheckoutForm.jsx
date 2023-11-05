@@ -5,10 +5,11 @@ import { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
 // import "../styles/common.css";
 
-const CheckoutForm = ({ price }) => {
-  console.log(price);
+const CheckoutForm = ({ cart, price }) => {
   const [cardError, setCardError] = useState("");
   const [axiosSecure] = useAxiosSecure();
+  const [processing, setProcessing] = useState(false);
+  const [TransactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const { user } = useAuth();
   const stripe = useStripe();
@@ -16,7 +17,14 @@ const CheckoutForm = ({ price }) => {
 
   useEffect(() => {
     axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      console.log(res.data.clientSecret);
+      setClientSecret(res.data.clientSecret);
+    });
+  }, []);
+
+  console.log("client Secret ", clientSecret);
+
+  useEffect(() => {
+    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
       setClientSecret(res.data.clientSecret);
     });
   }, []);
@@ -33,12 +41,22 @@ const CheckoutForm = ({ price }) => {
     if (card === null) {
       return;
     }
-    console.log(card);
+    // console.log(card);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
+
+    setProcessing(true);
+
+    if (error) {
+      console.log("Error", error);
+      setCardError(error.message);
+    } else {
+      setCardError("");
+      console.log("PaymentMethod", paymentMethod);
+    }
 
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -55,15 +73,25 @@ const CheckoutForm = ({ price }) => {
       console.log(confirmError);
     }
 
-    console.log("Payment-intent: ", paymentIntent);
+    if (paymentIntent?.status === "succeeded") {
+      setTransactionId(paymentIntent.id);
+      const payment = {
+        email: user?.email,
+        TransactionId: paymentIntent.id,
+        price,
+        items: cart.map((item) => item._id),
+        itemName: cart.map((item) => item.name),
+      };
 
-    if (error) {
-      console.log("Error", error);
-      setCardError(error.message);
-    } else {
-      setCardError("");
-      console.log("PaymentMethod", paymentMethod);
+      axiosSecure.post("/payments", payment).then((res) => {
+        console.log(res.data);
+        if (res.data.insertedId) {
+          console.log(res.data.insertedId);
+        }
+      });
     }
+
+    console.log("Payment-intent: ", paymentIntent);
   };
 
   return (
@@ -88,13 +116,19 @@ const CheckoutForm = ({ price }) => {
         <button
           className={"btn btn-sm btn-primary mt-3"}
           type="submit"
-          disabled={!stripe || !clientSecret}
+          disabled={!stripe || !clientSecret || processing}
         >
           Pay
         </button>
       </form>
+
       {cardError && (
         <p className="text-red-500 font-semibold text-center">{cardError}</p>
+      )}
+      {TransactionId && (
+        <p className="text-green-500 text-center my-5">
+          Your transation Id is: {TransactionId}
+        </p>
       )}
     </>
   );

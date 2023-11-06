@@ -1,15 +1,32 @@
 import { Helmet } from "react-helmet-async";
 import { TfiWallet } from "react-icons/tfi";
 import { LuChefHat } from "react-icons/lu";
+import useAuth from "../../../hooks/useAuth";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 const AdminHome = () => {
+  const { user } = useAuth();
+
+  const [axiosSecure] = useAxiosSecure();
+
+  const { data: stats = {} } = useQuery({
+    queryKey: ["admin-stats"],
+    queryFn: async () => {
+      const res = await axiosSecure("/admin-stats");
+      return res.data;
+    },
+  });
+
+  console.log(stats);
   return (
     <>
       <Helmet>
         <title>Bistro Boss | Admin Home</title>
       </Helmet>
       <h1 className="text-3xl text-[#151515] font-[Cinzel] uppercase font-semibold">
-        Hi, welcome back
+        Hi, welcome back{" "}
+        <span className="text-orange-500">{user?.displayName}</span>
       </h1>
       <div className="grid md:grid-cols-4">
         <div className="flex justify-center items-center bg-gradient-to-r from-[#BB34F5] from-0% to-[#FCDBFF] to-100% h-24 m-6 rounded-sm text-white">
@@ -17,7 +34,7 @@ const AdminHome = () => {
             <TfiWallet />
           </div>
           <div>
-            <p>1000</p>
+            <p>{stats.revenue}</p>
             <p>revenue</p>
           </div>
         </div>
@@ -26,7 +43,7 @@ const AdminHome = () => {
             <TfiWallet />
           </div>
           <div>
-            <p>1500</p>
+            <p>{stats.users}</p>
             <p>Customers</p>
           </div>
         </div>
@@ -35,7 +52,7 @@ const AdminHome = () => {
             <LuChefHat />
           </div>
           <div>
-            <p>103</p>
+            <p>{stats.products}</p>
             <p>Products</p>
           </div>
         </div>
@@ -44,7 +61,7 @@ const AdminHome = () => {
             <TfiWallet />
           </div>
           <div>
-            <p>500</p>
+            <p>{stats.orders}</p>
             <p>Orders</p>
           </div>
         </div>

@@ -16,18 +16,14 @@ const CheckoutForm = ({ cart, price }) => {
   const elements = useElements();
 
   useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      setClientSecret(res.data.clientSecret);
-    });
+    if (price > 0) {
+      axiosSecure.post("/create-payment-intent", { price }).then((res) => {
+        setClientSecret(res.data.clientSecret);
+      });
+    }
   }, []);
 
   console.log("client Secret ", clientSecret);
-
-  useEffect(() => {
-    axiosSecure.post("/create-payment-intent", { price }).then((res) => {
-      setClientSecret(res.data.clientSecret);
-    });
-  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -79,7 +75,11 @@ const CheckoutForm = ({ cart, price }) => {
         email: user?.email,
         TransactionId: paymentIntent.id,
         price,
-        items: cart.map((item) => item._id),
+        date: new Date(),
+        quantity: cart.length,
+        cartItems: cart.map((item) => item._id),
+        menuItemId: cart.map((item) => item.menuItemId),
+        status: "service pending",
         itemName: cart.map((item) => item.name),
       };
 

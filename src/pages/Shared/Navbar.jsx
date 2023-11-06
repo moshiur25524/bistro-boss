@@ -3,10 +3,14 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import useCart from "../../hooks/useCart";
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [cart] = useCart();
+  const [isAdmin] = useAdmin();
+
+  const isAdminAdmin = isAdmin?.admin;
 
   const navOptions = (
     <>
@@ -21,6 +25,13 @@ const Navbar = () => {
       </li>
       <li>
         <Link to={"/order/salad"}>Order Food</Link>
+      </li>
+      <li>
+        <Link
+          to={isAdminAdmin ? "/dashboard/admin-home" : "/dashboard/user-home"}
+        >
+          Dashboard
+        </Link>
       </li>
       <li>
         <Link to={"/dashboard/mycart"}>

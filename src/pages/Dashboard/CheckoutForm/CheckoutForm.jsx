@@ -15,6 +15,7 @@ const CheckoutForm = ({ cart, price }) => {
   const stripe = useStripe();
   const elements = useElements();
 
+  // step 6: creating a payment intent form getting the api from server
   useEffect(() => {
     if (price > 0) {
       axiosSecure.post("/create-payment-intent", { price }).then((res) => {
@@ -25,6 +26,7 @@ const CheckoutForm = ({ cart, price }) => {
 
   console.log("client Secret ", clientSecret);
 
+  // step 2: payment Card in Stripe
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -38,7 +40,7 @@ const CheckoutForm = ({ cart, price }) => {
       return;
     }
     // console.log(card);
-
+    // step 3: Create a Card with Stripe
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card,
@@ -46,6 +48,7 @@ const CheckoutForm = ({ cart, price }) => {
 
     setProcessing(true);
 
+    // step 4: Showing Error using a Hook for card if occur
     if (error) {
       console.log("Error", error);
       setCardError(error.message);
@@ -54,6 +57,7 @@ const CheckoutForm = ({ cart, price }) => {
       console.log("PaymentMethod", paymentMethod);
     }
 
+    // step 5: Created a payment Intent for starting the payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
@@ -69,6 +73,8 @@ const CheckoutForm = ({ cart, price }) => {
       console.log(confirmError);
     }
 
+    // step 7: payment is completed and sent the price and payment information
+
     if (paymentIntent?.status === "succeeded") {
       setTransactionId(paymentIntent.id);
       const payment = {
@@ -83,6 +89,7 @@ const CheckoutForm = ({ cart, price }) => {
         itemName: cart.map((item) => item.name),
       };
 
+      // step 7: post data for payment by creating an api from backend
       axiosSecure.post("/payments", payment).then((res) => {
         console.log(res.data);
         if (res.data.insertedId) {
@@ -113,6 +120,8 @@ const CheckoutForm = ({ cart, price }) => {
             },
           }}
         />
+
+        {/* The button will be disabled after the payment submission */}
         <button
           className={"btn btn-sm btn-primary mt-3"}
           type="submit"

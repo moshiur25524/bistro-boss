@@ -12,7 +12,7 @@ const Payment = () => {
   const price = parseFloat(total.toFixed(2));
 
   console.log(cart);
-
+  // step 1: Stripe is intrigated for payment
   const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
   return (
@@ -21,7 +21,6 @@ const Payment = () => {
         <title>Bistro Boss | Payment</title>
       </Helmet>
       <SectionTitile subHeading={"Please Payment"} heading={"payment"} />
-
       <h1 className="text-3xl my-5 text-center">Payment Card</h1>
 
       <Elements stripe={stripePromise}>

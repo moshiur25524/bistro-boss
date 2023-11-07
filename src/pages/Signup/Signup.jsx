@@ -5,9 +5,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Providers/AuthProviders";
 import Swal from "sweetalert2";
 import SocialLogin from "../Shared/SocialLogin";
+import { useState } from "react";
+import { BiHide, BiShow } from "react-icons/bi";
 
 const Signup = () => {
   const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const {
@@ -59,6 +62,10 @@ const Signup = () => {
     });
   };
 
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   console.log(watch("example"));
   return (
     <>
@@ -101,6 +108,9 @@ const Signup = () => {
                   // name="photo_url"
                   {...register("PhotoURL", { required: true })}
                   placeholder="Photo_URL"
+                  defaultValue={
+                    "https://pbs.twimg.com/profile_images/511333573119320064/3q1981fx_400x400.jpeg"
+                  }
                   className="input input-bordered"
                 />
                 {errors.PhotoURL && (
@@ -122,12 +132,12 @@ const Signup = () => {
                   <span className="text-red-600">Email is required</span>
                 )}
               </div>
-              <div className="form-control">
+              <div className="form-control relative">
                 <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   name="password"
                   {...register("password", {
                     required: true,
@@ -139,6 +149,13 @@ const Signup = () => {
                   placeholder="password"
                   className="input input-bordered"
                 />
+                <span
+                  className="absolute"
+                  onClick={togglePasswordVisibility}
+                  style={{ cursor: "pointer", right: "40px", top: "55px" }}
+                >
+                  {showPassword ? <BiHide /> : <BiShow />}
+                </span>
                 {errors.password?.type === "required" && (
                   <span className="text-red-600">Password is required</span>
                 )}

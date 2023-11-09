@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Rating, ThinRoundedStar } from "@smastrom/react-rating";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import CustomButton from "../../../components/CustomButton/CustomButton";
 
 const Review = () => {
   const [rating, setRating] = useState(0);
@@ -62,7 +63,7 @@ const Review = () => {
         subHeading={"Sharing is Caring!!!"}
         heading={"Give a review"}
       />
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen">
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-none">
           <div className="flex flex-col items-center">
             <h2 className="text-3xl my-10 uppercase font-semibold font-[Cinzel]">
@@ -118,13 +119,7 @@ const Review = () => {
                 className="input input-bordered rounded-none"
               />
             </div>
-            <div className="form-control mt-6">
-              <input
-                className="btn btn-primary rounded-none bg-gradient-to-r from-[#835D23] to-[#B58130] text-white border-0"
-                type="submit"
-                value={` Send Review ${(<BsRocketTakeoff />)}`}
-              ></input>
-            </div>
+            <CustomButton text={"send review"} Icon={BsRocketTakeoff} />
           </form>
         </div>
       </div>

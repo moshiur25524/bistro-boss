@@ -18,6 +18,7 @@ import useCart from "../hooks/useCart";
 import { BiSolidContact } from "react-icons/bi";
 import useAdmin from "../hooks/useAdmin";
 import Loading from "../pages/Shared/Loading";
+import ScrollUpButton from "../components/ScrollUpButton/ScrollUpButton";
 
 const Dashboard = () => {
   const [cart] = useCart();
@@ -47,6 +48,7 @@ const Dashboard = () => {
           <FaHamburger />
         </label>
         <Outlet />
+        <ScrollUpButton />
       </div>
 
       <div className="drawer-side">

@@ -51,7 +51,7 @@ const ManageItems = () => {
         </h1>
         <table className="table">
           {/* head */}
-          <thead>
+          <thead className=" bg-[#D1A054] rounded-[12px] text-white uppercase sticky top-0">
             <tr>
               <th>#</th>
               <th>Item</th>
@@ -94,6 +94,8 @@ const ManageItems = () => {
             ))}
           </tbody>
         </table>
+        {/* TODO: Have to implement pagination for menuItems */}
+        {/* <PaginatedItems itemsPerPage={20} /> */}
       </div>
     </div>
   );

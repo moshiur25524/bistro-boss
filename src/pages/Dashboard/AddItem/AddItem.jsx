@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet-async";
 import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { BsRocketTakeoff } from "react-icons/bs";
 
 const AddItem = () => {
   const image_hosting_token = import.meta.env.VITE_image_upload_token;
@@ -124,12 +125,14 @@ const AddItem = () => {
               className="file-input file-input-sm file-input-bordered w-full mt-5"
             />
           </div>
-          <div className=" mt-6">
+          <div className=" mt-6 relative">
             <input
               className="btn btn-primary rounded-none bg-gradient-to-r from-[#835D23] to-[#B58130] text-white border-0"
               type="submit"
-              value={`Send Review`}
-            ></input>
+              value={`ADD Item`}
+              style={{ paddingRight: "30px" }} // Add space for the icon
+            />
+            <BsRocketTakeoff className="absolute top-1/2 right-0 transform -translate-y-1/2 text-green-500 h-5 w-5" />
           </div>
         </form>
       </div>

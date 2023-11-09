@@ -4,6 +4,7 @@ import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 
 const ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
+  const [active, setActive] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/bookings")
@@ -13,6 +14,13 @@ const ManageBookings = () => {
         // console.log(data);
       });
   }, []);
+
+  const handleActive = (id) => {
+    console.log("Clicked", id);
+    if (id) {
+      setActive(true);
+    }
+  };
   return (
     <div>
       <SectionTitile subHeading={"at a glance"} heading={"manage bookings"} />
@@ -33,7 +41,7 @@ const ManageBookings = () => {
               <th>action</th>
             </tr>
           </thead>
-          {/* TODO: have to retrieve booking data from banckend */}
+
           <tbody>
             {bookings.map((book, index) => (
               <tr key={book?._id}>
@@ -44,12 +52,35 @@ const ManageBookings = () => {
                 <td>{book?.time}</td>
                 {/* TODO: Task on action and activity is  incomplete */}
                 <td>
-                  <button className="btn btn-outline btn-xs">Pendding</button>
+                  {active ? (
+                    <button className="btn btn-outline text-[#287855] btn-xs">
+                      Done
+                    </button>
+                  ) : (
+                    <button className="btn btn-outline text-[#AE7B2B] btn-xs">
+                      Pending
+                    </button>
+                  )}
                 </td>
                 <td>
-                  <button className="btn btn-outline">
-                    <GiConfirmed style={{ color: "greenyellow" }} />
-                  </button>
+                  {active ? (
+                    <button
+                      className={`btn btn-outline bg-green-400 rounded-full`}
+                    >
+                      <GiConfirmed
+                        style={{ color: "green", fontSize: "25px" }}
+                      />
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleActive(book._id)}
+                      className={`btn btn-outline hover:bg-green-300 rounded-full`}
+                    >
+                      <GiConfirmed
+                        style={{ color: "green", fontSize: "25px" }}
+                      />
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}

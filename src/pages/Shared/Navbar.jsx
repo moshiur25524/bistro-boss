@@ -21,26 +21,29 @@ const Navbar = () => {
         <Link to={"/menu"}>Our Menu</Link>
       </li>
       <li>
-        <Link to={"/secret"}>Secret</Link>
-      </li>
-      <li>
         <Link to={"/order/salad"}>Order Food</Link>
       </li>
-      <li>
-        <Link
-          to={isAdminAdmin ? "/dashboard/admin-home" : "/dashboard/user-home"}
-        >
-          Dashboard
-        </Link>
-      </li>
-      <li>
-        <Link to={"/dashboard/mycart"}>
-          <button className="btn btn-sm">
-            <AiOutlineShoppingCart />
-            <div className="badge badge-warning">+{cart?.length || 0} </div>
-          </button>
-        </Link>
-      </li>
+      {user && (
+        <>
+          <li>
+            <Link
+              to={
+                isAdminAdmin ? "/dashboard/admin-home" : "/dashboard/user-home"
+              }
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link to={"/dashboard/mycart"}>
+              <button className="btn btn-sm">
+                <AiOutlineShoppingCart />
+                <div className="badge badge-warning">+{cart?.length || 0} </div>
+              </button>
+            </Link>
+          </li>
+        </>
+      )}
     </>
   );
   return (

@@ -3,11 +3,19 @@ import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 import useMenu from "../../../hooks/useMenu";
 import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import ReactPaginate from "react-paginate";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageItems = () => {
   const [menu, , refetch] = useMenu();
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 5;
+  const endOffset = itemOffset + itemsPerPage;
   // const [axiosSecure] = useAxiosSecure();
+
+  const menuItems = menu.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(menu.length / itemsPerPage);
 
   const handleItemDelete = (item) => {
     Swal.fire({
@@ -39,6 +47,14 @@ const ManageItems = () => {
       console.log(item);
     });
   };
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % menu.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+  };
   return (
     <div>
       <Helmet>
@@ -63,7 +79,7 @@ const ManageItems = () => {
             </tr>
           </thead>
           <tbody>
-            {menu.map((item, index) => (
+            {menuItems.map((item, index) => (
               <tr key={item._id}>
                 <td>{index + 1}</td>
                 <td>
@@ -96,6 +112,23 @@ const ManageItems = () => {
         </table>
         {/* TODO: Have to implement pagination for menuItems */}
         {/* <PaginatedItems itemsPerPage={20} /> */}
+        <div className="w-full mx-auto">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="next >"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="< previous"
+            renderOnZeroPageCount={null}
+            containerClassName="join flex justify-center mt-8"
+            pageClassName="join-item btn"
+            previousClassName="join-item btn"
+            nextClassName="join-item btn"
+            breakClassName="join-item btn"
+            activeClassName="btn-active bg-[#D1A054]  text-white"
+          />
+        </div>
       </div>
     </div>
   );

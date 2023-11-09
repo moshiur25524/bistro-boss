@@ -6,7 +6,6 @@ import Order from "../pages/Order/Order";
 import Login from "../pages/Login/Login";
 import Signup from "../pages/Signup/Signup";
 import PrivateRoute from "./PrivateRoute";
-import Secret from "../pages/Shared/Secret";
 import Dashboard from "../layout/Dashboard";
 import MyCart from "../pages/Dashboard/MyCart/MyCart";
 import NotFoundPage from "../pages/Shared/NotFoundPage";
@@ -48,14 +47,6 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <Signup />,
       },
-      {
-        path: "secret",
-        element: (
-          <PrivateRoute>
-            <Secret />
-          </PrivateRoute>
-        ),
-      },
     ],
   },
 
@@ -72,6 +63,10 @@ export const router = createBrowserRouter([
       {
         path: "mycart",
         element: <MyCart />,
+      },
+      {
+        path: "payment",
+        element: <Payment />,
       },
       {
         path: "review",
@@ -113,10 +108,6 @@ export const router = createBrowserRouter([
       {
         path: "booking",
         element: <MyBooking />,
-      },
-      {
-        path: "payment",
-        element: <Payment />,
       },
       {
         path: "history",

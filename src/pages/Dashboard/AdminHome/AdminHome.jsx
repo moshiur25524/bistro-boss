@@ -123,7 +123,7 @@ const AdminHome = () => {
         <span className="text-orange-500">{user?.displayName}</span>
       </h1>
 
-      <div className="stats shadow mt-10">
+      <div className="stats shadow mt-10 w-full">
         <div className="stat">
           <div className="stat-figure text-primary">
             <svg
@@ -142,7 +142,6 @@ const AdminHome = () => {
           </div>
           <div className="stat-title">Revenue</div>
           <div className="stat-value text-primary">${stats.fixedrevenue}</div>
-          <div className="stat-desc">21% more than last month</div>
         </div>
 
         <div className="stat">
@@ -163,7 +162,6 @@ const AdminHome = () => {
           </div>
           <div className="stat-title">Users</div>
           <div className="stat-value text-secondary">{stats.users}</div>
-          <div className="stat-desc">21% more than last month</div>
         </div>
         <div className="stat">
           <div className="stat-figure text-secondary">
@@ -182,8 +180,7 @@ const AdminHome = () => {
             </svg>
           </div>
           <div className="stat-title">Total Menu</div>
-          <div className="stat-value text-secondary">{stats.products}</div>
-          <div className="stat-desc">21% more than last month</div>
+          <div className="stat-value text-primary">{stats.products}</div>
         </div>
         <div className="stat">
           <div className="stat-figure text-secondary">
@@ -203,7 +200,6 @@ const AdminHome = () => {
           </div>
           <div className="stat-title">Orders</div>
           <div className="stat-value text-secondary">{stats.orders}</div>
-          <div className="stat-desc">21% more than last month</div>
         </div>
       </div>
       <div className="flex mt-16">

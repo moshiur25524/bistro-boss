@@ -63,8 +63,8 @@ const Review = () => {
         subHeading={"Sharing is Caring!!!"}
         heading={"Give a review"}
       />
-      <div className="hero min-h-screen">
-        <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 rounded-none">
+      <div className="hero min-h-screen w-full">
+        <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 rounded-none">
           <div className="flex flex-col items-center">
             <h2 className="text-3xl my-10 uppercase font-semibold font-[Cinzel]">
               Rate Us
@@ -79,7 +79,7 @@ const Review = () => {
             </div>
           </div>
 
-          <form onSubmit={handleReview} className="card-body ">
+          <form onSubmit={handleReview} className="card-body">
             <div className="form-control">
               <label className="label">
                 <span className="label-text font-bold">

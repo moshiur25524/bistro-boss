@@ -134,9 +134,9 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/"}>
+            <NavLink to={"/order/salad"}>
               <FaShopify />
-              Shop
+              Order
             </NavLink>
           </li>
           <li>

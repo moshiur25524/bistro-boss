@@ -3,6 +3,7 @@ import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useEffect } from "react";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 // import "../styles/common.css";
 
 const CheckoutForm = ({ cart, price }) => {
@@ -77,6 +78,14 @@ const CheckoutForm = ({ cart, price }) => {
 
     if (paymentIntent?.status === "succeeded") {
       setTransactionId(paymentIntent.id);
+
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Payment Successful",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       const payment = {
         email: user?.email,
         TransactionId: paymentIntent.id,

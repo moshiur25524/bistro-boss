@@ -13,6 +13,7 @@ import SocialLogin from "../Shared/SocialLogin";
 
 const Login = () => {
   const [disabled, setDisabled] = useState(true);
+  const [error, SetError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const { signin } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -34,23 +35,46 @@ const Login = () => {
     const email = form.email.value;
     const password = form.password.value;
     console.log(email, password);
-    signin(email, password).then((result) => {
-      const user = result.user;
-      if (user) {
-        Swal.fire({
-          title: "Successfully Logged in",
-          showClass: {
-            popup: "animate__animated animate__fadeInDown",
-          },
-          hideClass: {
-            popup: "animate__animated animate__fadeOutUp",
-          },
-        });
-      }
-      navigate(from, { replace: true });
-      console.log(user);
-    });
+    signin(email, password)
+      .then((result) => {
+        const user = result.user;
 
+        if (user) {
+          Swal.fire({
+            title: "Successfully Logged in",
+            showClass: {
+              popup: "animate__animated animate__fadeInDown",
+            },
+            hideClass: {
+              popup: "animate__animated animate__fadeOutUp",
+            },
+          });
+        }
+        navigate(from, { replace: true });
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        SetError(errorMessage);
+        console.log("Error: ", errorMessage);
+      });
+
+    // document.getElementById("my_modal_2").showModal();
+    // if (error) {
+    //   return (
+    //     <dialog id="my_modal_2" className="modal">
+    //       <div className="modal-box">
+    //         <h3 className="font-bold text-lg">Hello!</h3>
+    //         <p className="py-4">Press ESC key or click outside to close</p>
+    //       </div>
+    //       <form method="dialog" className="modal-backdrop">
+    //         <button>close</button>
+    //       </form>
+    //     </dialog>
+    //   );
+    // }
+
+    // SetError("");
     form.reset();
   };
 
@@ -145,6 +169,11 @@ const Login = () => {
                   value="Login"
                 />
               </div>
+              {error && (
+                <p className="text-red-500 text-center font-semibold">
+                  {error}
+                </p>
+              )}
             </div>
             <SocialLogin />
           </form>

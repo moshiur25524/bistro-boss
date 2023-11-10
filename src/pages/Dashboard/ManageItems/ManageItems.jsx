@@ -6,10 +6,12 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
+// import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const ManageItems = () => {
   const [menu, , refetch] = useMenu();
   const [itemOffset, setItemOffset] = useState(0);
+  // const [axiosSecure] = useAxiosSecure();
   const itemsPerPage = 5;
   const endOffset = itemOffset + itemsPerPage;
   // const [axiosSecure] = useAxiosSecure();
@@ -28,10 +30,6 @@ const ManageItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // const url = `/menu/${item._id}`;
-        // axiosSecure.delete(url).then((res) => {
-        //   console.log(url);
-        //   console.log("delted res", res.data);
         fetch(`http://localhost:5000/menu/${item._id}`, {
           method: "DELETE",
         })
@@ -40,14 +38,35 @@ const ManageItems = () => {
             console.log(data);
             if (data.deletedCount > 0) {
               refetch();
-              Swal.fire("Deleted!", `${item.name} has been deleted`, "success");
+              Swal.fire("Deleted!", "success");
             }
           });
       }
-      console.log(item);
+      // if (result.isConfirmed) {
+      //   const url = `/menu/${item._id}`;
+      //   axiosSecure.delete(url).then((res) => {
+      //     console.log(url);
+      //     if (res.data?.deletedCount > 0) {
+      //       refetch();
+      //       Swal.fire("Deleted!", `${item.name} has been deleted`, "success");
+      //     }
+      //     console.log("delted res", res.data);
+      //   });
+      // }
+      // fetch(`http://localhost:5000/menu/${item._id}`, {
+      //   method: "DELETE",
+      // })
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //     if (data.deletedCount > 0) {
+      //       refetch();
+      //       Swal.fire("Deleted!", `${item.name} has been deleted`, "success");
+      //     }
+      //   });
     });
   };
-
+  // console.log(item)
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % menu.length;
     console.log(
@@ -69,7 +88,6 @@ const ManageItems = () => {
           {/* head */}
           <thead className=" bg-[#D1A054] rounded-[12px] text-white uppercase sticky top-0">
             <tr>
-              <th>#</th>
               <th>Item</th>
               <th>Name</th>
               <th>Category</th>
@@ -79,16 +97,12 @@ const ManageItems = () => {
             </tr>
           </thead>
           <tbody>
-            {menuItems.map((item, index) => (
+            {menuItems.map((item) => (
               <tr key={item._id}>
-                <td>{index + 1}</td>
                 <td>
                   <div className="avatar">
                     <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src={item.image}
-                        alt="Avatar Tailwind CSS Component"
-                      />
+                      <img src={item.image} alt={item.name} />
                     </div>
                   </div>
                 </td>
@@ -122,8 +136,8 @@ const ManageItems = () => {
             previousLabel="< previous"
             renderOnZeroPageCount={null}
             containerClassName="join flex justify-center mt-8"
-            pageClassName="join-item btn"
-            previousClassName="join-item btn"
+            pageClassName="join-item btn mr-3"
+            previousClassName="join-item btn mr-2"
             nextClassName="join-item btn"
             breakClassName="join-item btn"
             activeClassName="btn-active bg-[#D1A054]  text-white"

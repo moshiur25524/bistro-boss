@@ -4,22 +4,27 @@ import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 
 const ManageBookings = () => {
   const [bookings, setBookings] = useState([]);
-  const [active, setActive] = useState(false);
+  // const [active, setActive] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:5000/bookings")
       .then((res) => res.json())
       .then((data) => {
-        setBookings(data);
+        const enhancedData = data.map((booking) => ({
+          ...booking,
+          active: false, // Initialize 'active' property as false for each booking
+        }));
+        setBookings(enhancedData);
         // console.log(data);
       });
   }, []);
 
   const handleActive = (id) => {
-    console.log("Clicked", id);
-    if (id) {
-      setActive(true);
-    }
+    setBookings((prevBookings) =>
+      prevBookings.map((booking) =>
+        booking._id === id ? { ...booking, active: !booking.active } : booking
+      )
+    );
   };
   return (
     <div>
@@ -52,7 +57,7 @@ const ManageBookings = () => {
                 <td>{book?.time}</td>
                 {/* TODO: Task on action and activity is  incomplete */}
                 <td>
-                  {active ? (
+                  {typeof book.active !== "undefined" && book.active ? (
                     <button className="btn btn-outline text-[#287855] btn-xs">
                       Done
                     </button>
@@ -63,7 +68,7 @@ const ManageBookings = () => {
                   )}
                 </td>
                 <td>
-                  {active ? (
+                  {typeof book.active !== "undefined" && book.active ? (
                     <button
                       className={`btn btn-outline bg-green-400 rounded-full`}
                     >

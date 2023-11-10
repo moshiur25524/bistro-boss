@@ -3,8 +3,11 @@ import CustomButton from "../../../components/CustomButton/CustomButton";
 import { FaClipboardList } from "react-icons/fa";
 import { CgPhone } from "react-icons/cg";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const Reservation = () => {
+  const { user } = useAuth();
+
   const handleReservation = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -92,6 +95,7 @@ const Reservation = () => {
           <input
             type="text"
             name="name"
+            defaultValue={user?.displayName}
             placeholder="Your Name"
             className="input rounded input-bordered"
           />
@@ -114,6 +118,7 @@ const Reservation = () => {
           <input
             type="email"
             name="email"
+            defaultValue={user?.email}
             placeholder="Email"
             className="input rounded input-bordered"
           />

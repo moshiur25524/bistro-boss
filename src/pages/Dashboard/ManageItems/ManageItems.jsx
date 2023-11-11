@@ -5,6 +5,8 @@ import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
+import { BiEdit } from "react-icons/bi";
+import { Link } from "react-router-dom";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 // import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
@@ -110,7 +112,11 @@ const ManageItems = () => {
                 <td>{item.category}</td>
                 <td>{item.price}</td>
                 <td>
-                  <button className="btn btn-ghost btn-xs">details</button>
+                  <Link to={`/dashboard/update-item/${item._id}`}>
+                    <button className="btn btn-ghost btn-md bg-[#D1A054] text-white">
+                      <BiEdit style={{ fontSize: "18px" }} />
+                    </button>
+                  </Link>
                 </td>
                 <td>
                   <button

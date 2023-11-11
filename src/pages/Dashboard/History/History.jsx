@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const History = () => {
   const { user } = useAuth();
@@ -17,6 +18,9 @@ const History = () => {
   }, []);
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | Payment-history</title>
+      </Helmet>
       <SectionTitile subHeading={"At a Glance"} heading={"payment history"} />
       <div className="bg-white p-5">
         <div className="flex justify-between uppercase font-semibold font-[Cinzel] mb-5">
@@ -41,7 +45,7 @@ const History = () => {
                   <td>{index + 1}</td>
                   <td>{pay.email}</td>
                   <td>{pay.quantity}</td>
-                  <td>{pay.TransactionId}</td>
+                  <td className="text-green-600">{pay.TransactionId}</td>
                   <td>${pay.price}</td>
                   <td>{pay.date}</td>
                 </tr>

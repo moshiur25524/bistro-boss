@@ -4,6 +4,7 @@ import { FaClipboardList } from "react-icons/fa";
 import { CgPhone } from "react-icons/cg";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const Reservation = () => {
   const { user } = useAuth();
@@ -47,6 +48,9 @@ const Reservation = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Bistro Boss | Reservation</title>
+      </Helmet>
       <SectionTitile subHeading={"Reservation"} heading={"book a table"} />
       <form
         onSubmit={handleReservation}

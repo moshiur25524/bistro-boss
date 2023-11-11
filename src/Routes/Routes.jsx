@@ -21,6 +21,7 @@ import MyBooking from "../pages/Dashboard/MyBooking/MyBooking";
 import UserHome from "../pages/Dashboard/UserHome/UserHome";
 import History from "../pages/Dashboard/History/History";
 import Reservation from "../pages/Dashboard/Reservation/Reservation";
+import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +95,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoutes>
             <ManageItems />
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "update-item/:id",
+        element: (
+          <AdminRoutes>
+            <UpdateItem />
           </AdminRoutes>
         ),
       },

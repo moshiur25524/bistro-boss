@@ -81,7 +81,7 @@ const MyBooking = () => {
                   <th>#</th>
                   <th>Date</th>
                   <th>Time</th>
-                  {/* <th>Category</th> */}
+                  <th>Price</th>
                   <th>Guest</th>
                   <th>action</th>
                 </tr>
@@ -100,6 +100,7 @@ const MyBooking = () => {
 
                     <td>{item.date}</td>
                     <td>{item.time}</td>
+                    <td>${parseInt(item.guest) * 14}</td>
                     <td>{item.guest}</td>
                     {/* <td>$ {item.price}</td> */}
                     <td>

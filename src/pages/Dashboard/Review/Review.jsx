@@ -24,6 +24,7 @@ const Review = () => {
     const details = form.review.value;
 
     const review = {
+      email: user?.email,
       recipe,
       suggestion,
       details,

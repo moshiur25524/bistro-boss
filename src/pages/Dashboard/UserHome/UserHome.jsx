@@ -65,7 +65,7 @@ const UserHome = () => {
       </div>
 
       <div className="flex flex-col md:flex-row mt-8">
-        <div className="flex flex-col h-[400px] w-full items-center justify-center bg-[#FFEDD5]">
+        <div className="flex flex-col h-[400px] w-full items-center justify-center border-r-0 md:border-r-2  border-orange-900 bg-[#FFEDD5]">
           <div>
             <img
               src={user?.photoURL}

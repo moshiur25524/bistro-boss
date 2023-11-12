@@ -53,7 +53,7 @@ const Dashboard = () => {
 
       <div className="drawer-side">
         <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-        <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-base-content font-semibold">
+        <ul className="menu p-4 w-80 min-h-full bg-[#D1A054] text-[#151515] font-semibold">
           {/* Sidebar content here */}
           {isAdminAdmin ? (
             <>

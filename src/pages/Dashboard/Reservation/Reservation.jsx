@@ -1,10 +1,10 @@
 import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 import CustomButton from "../../../components/CustomButton/CustomButton";
 import { FaClipboardList } from "react-icons/fa";
-import { CgPhone } from "react-icons/cg";
 import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import Location from "../../../components/Location/Location";
 
 const Reservation = () => {
   const { user } = useAuth();
@@ -129,38 +129,7 @@ const Reservation = () => {
         </div>
         <CustomButton text={"Book A Table"} Icon={FaClipboardList} />
       </form>
-      <div>
-        <SectionTitile subHeading={"Visit Us"} heading={"Our location"} />
-        <div className="flex w-full">
-          <div>
-            <div className="text-center h-16 bg-[#D1A054]">
-              <CgPhone />
-            </div>
-            <div className="flex flex-col justify-center items-center h-80 ">
-              <h1 className="text-xl">Phone</h1>
-              <p>+88 01854167548</p>
-            </div>
-          </div>
-          <div>
-            <div className="text-center h-16 bg-[#D1A054]">
-              <CgPhone />
-            </div>
-            <div className="flex flex-col justify-center items-center h-80 ">
-              <h1 className="text-xl">Phone</h1>
-              <p>+88 01854167548</p>
-            </div>
-          </div>
-          <div>
-            <div className="text-center h-16 bg-[#D1A054]">
-              <CgPhone />
-            </div>
-            <div className="flex flex-col justify-center items-center h-80 ">
-              <h1 className="text-xl">Phone</h1>
-              <p>+88 01854167548</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Location />
     </div>
   );
 };

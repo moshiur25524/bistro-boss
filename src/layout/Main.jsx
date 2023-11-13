@@ -10,7 +10,7 @@ const Main = () => {
     location.pathname.includes("/login") ||
     location.pathname.includes("/signup");
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-screen-x mx-auto container">
       {NoHeaderFooter || <Navbar />}
       <Outlet></Outlet>
       <ScrollUpButton />

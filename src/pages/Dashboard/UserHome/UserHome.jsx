@@ -60,7 +60,7 @@ const UserHome = () => {
             <FaPhoneAlt style={{ fontSize: "30px" }} />
           </div>
           <div className=" ">Contact</div>
-          <div className="stat-value ">10</div>
+          <div className="stat-value ">{stats.contactCount}</div>
         </div>
       </div>
 

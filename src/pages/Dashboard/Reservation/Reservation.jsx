@@ -64,6 +64,7 @@ const Reservation = () => {
             type="date"
             name="date"
             className="input rounded input-bordered"
+            required
           />
         </div>
         <div className="form-control">
@@ -74,6 +75,7 @@ const Reservation = () => {
             type="time"
             name="time"
             className="input rounded input-bordered"
+            required
           />
         </div>
         <div className="form-control">
@@ -84,6 +86,7 @@ const Reservation = () => {
             name="guest"
             className="select select-bordered w-full max-w-xs"
             defaultValue={"1 Person"}
+            required
           >
             <option>1 Persons</option>
             <option>2 Persons</option>
@@ -102,6 +105,7 @@ const Reservation = () => {
             defaultValue={user?.displayName}
             placeholder="Your Name"
             className="input rounded input-bordered"
+            required
           />
         </div>
         <div className="form-control">
@@ -113,6 +117,7 @@ const Reservation = () => {
             name="phone"
             placeholder="Phone Number"
             className="input rounded input-bordered"
+            required
           />
         </div>
         <div className="form-control">
@@ -125,6 +130,7 @@ const Reservation = () => {
             defaultValue={user?.email}
             placeholder="Email"
             className="input rounded input-bordered"
+            required
           />
         </div>
         <CustomButton text={"Book A Table"} Icon={FaClipboardList} />

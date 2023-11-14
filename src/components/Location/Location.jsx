@@ -34,7 +34,7 @@ const Location = () => {
               <item.icon style={{ fontSize: "30px", color: "#fff" }} />
             </div>
             <div className=" h-60 w-full flex flex-col justify-center items-center bg-[#ebe9e9]">
-              <h1 className="text-[#151515] text-3xl font-semibold uppercase">
+              <h1 className="text-[#151515] text-3xl font-semibold uppercase mb-5">
                 {item.text}
               </h1>
               <p className="text-[#444]">

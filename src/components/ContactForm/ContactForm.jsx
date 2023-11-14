@@ -87,6 +87,7 @@ const ContactForm = () => {
               name="name"
               defaultValue={user?.displayName}
               placeholder="Your Name"
+              required
               className="input rounded input-bordered"
             />
           </div>
@@ -99,6 +100,7 @@ const ContactForm = () => {
               name="email"
               defaultValue={user?.email}
               placeholder="Email"
+              required
               className="input rounded input-bordered"
             />
           </div>
@@ -112,6 +114,7 @@ const ContactForm = () => {
             name="phone"
             placeholder="Phone Number"
             className="input rounded input-bordered"
+            required
           />
         </div>
         <div className="form-control">
@@ -120,6 +123,7 @@ const ContactForm = () => {
           </label>
           <textarea
             name="message"
+            required
             rows={20}
             placeholder="Write your message here"
             className="input input-bordered rounded-none"

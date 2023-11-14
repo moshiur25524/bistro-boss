@@ -7,9 +7,6 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 
 const MyBooking = () => {
-  // TODO: useBooking(); fatchig related problem; have to solve
-  // const [bookings] = useBooking();
-  // console.log(bookings);
   const { user } = useAuth();
   const [bookings, setBookings] = useState([]);
 
@@ -22,6 +19,7 @@ const MyBooking = () => {
   }, [user]);
   // const [cart, refetch] = useCart();
   // const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
+  // TODO: have to delete a booking
   const handleDelete = (item) => {
     Swal.fire({
       title: "Are you sure you want to Delete?",
@@ -32,7 +30,7 @@ const MyBooking = () => {
       confirmButtonText: " delete!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/carts/${item._id}`, {
+        fetch(`http://localhost:5000/booking/${item?._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -105,7 +103,7 @@ const MyBooking = () => {
                     {/* <td>$ {item.price}</td> */}
                     <td>
                       <button
-                        onClick={() => handleDelete(item)}
+                        onClick={() => handleDelete(item?._id)}
                         className="btn btn-ghost btn-md bg-red-600 text-white"
                       >
                         <FaTrash />

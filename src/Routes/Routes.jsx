@@ -23,6 +23,7 @@ import History from "../pages/Dashboard/History/History";
 import Reservation from "../pages/Dashboard/Reservation/Reservation";
 import UpdateItem from "../pages/Dashboard/UpdateItem/UpdateItem";
 import Contact from "../pages/Contact/Contact";
+import Blogs from "../pages/Blogs/Blogs";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
       },
       {
         path: "menu",

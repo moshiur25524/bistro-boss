@@ -1,4 +1,4 @@
-import { useQueries } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useAuth from "./useAuth";
 import Loading from "../pages/Shared/Loading";
 
@@ -6,7 +6,7 @@ const useBooking = () => {
   const { user, loading } = useAuth();
   const token = localStorage.getItem("access-token");
 
-  const { refetch, data: bookings = [] } = useQueries({
+  const { refetch, data: bookings = [] } = useQuery({
     queryKey: ["booking", user?.email],
     queryFn: async () => {
       const res = await fetch(

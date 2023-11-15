@@ -14,7 +14,7 @@ const Location = () => {
     {
       id: 2,
       text: "address",
-      subTitle: ["+38 (012) 34 56 789"],
+      subTitle: ["Savar, Ashulia", "Dhaka, Bangladesh"],
       icon: MdLocationPin,
     },
     {

@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+import { MdOutlineRestaurantMenu } from "react-icons/md";
 
 const MyCart = () => {
   const [cart, refetch] = useCart();
@@ -42,9 +43,14 @@ const MyCart = () => {
           <p className="text-red-500 text-center text-2xl font-bold">
             Cart is Empty
           </p>
-          <p className="text-orange-500 text-center text-2xl font-bold">
-            Order Food Please !
-          </p>
+          <div className="flex justify-center mt-5">
+            <Link to={"/order/salad"}>
+              {" "}
+              <button className="btn btn-md text-lg text-[#151515] bg-[#D1A054] hover:bg-[#8a6926] border-0">
+                Order Food <MdOutlineRestaurantMenu />
+              </button>
+            </Link>
+          </div>
         </>
       ) : (
         <div className="bg-white p-5">

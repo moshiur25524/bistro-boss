@@ -140,7 +140,7 @@ const Dashboard = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to={"/"}>
+            <NavLink to={"/contact"}>
               <BiSolidContact />
               Contact
             </NavLink>

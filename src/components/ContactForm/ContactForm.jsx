@@ -4,25 +4,34 @@ import SectionTitile from "../sectionTitle/SectionTitile";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 import emailjs from "@emailjs/browser";
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 
 const ContactForm = () => {
   const { user } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const service_id = "service_wbbgl5c";
+  const template_id = "template_s18aq6w";
+  const user_id = "i450Eyy2msOZu4AcZ";
+  const form = useRef();
 
-  useEffect(() => {
-    emailjs.init("i450Eyy2msOZu4AcZ");
-  }, []);
   const handleContactForm = async (e) => {
     e.preventDefault();
-    const form = e.target;
+    const formData = e.target;
 
-    const name = form.name.value;
-    const phone = form.phone.value;
-    const email = form.email.value;
-    const message = form.message.value;
+    const name = formData.name.value;
+    const phone = formData.phone.value;
+    const email = formData.email.value;
+    const message = formData.message.value;
 
     const messages = { name, phone, email, message };
+
+    await emailjs.sendForm(service_id, template_id, form.current, user_id).then(
+      (result) => {
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
 
     await fetch("http://localhost:5000/contact", {
       method: "POST",
@@ -45,38 +54,22 @@ const ContactForm = () => {
         }
       });
 
-    // Email sending
-
-    const serviceId = "service_fd1p744";
-    const templateId = "template_s18aq6w";
-    try {
-      setLoading(true);
-      await emailjs.send(serviceId, templateId, {
-        name: name,
-        recipient: email,
-      });
-      alert("email successfully sent check inbox");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-    form.reset();
+    formData.reset();
 
     console.log(messages);
-    // form.reset();
   };
 
-  if (loading) {
-    return "loading...";
-  }
   return (
     <div>
       <SectionTitile
         heading={"Send Us a Message"}
         subHeading={"contact form"}
       />
-      <form className="w-2/3 mx-auto mb-36" onSubmit={handleContactForm}>
+      <form
+        ref={form}
+        className="w-2/3 mx-auto mb-36"
+        onSubmit={handleContactForm}
+      >
         <div className="">
           <div className="form-control">
             <label className="label">

@@ -3,26 +3,30 @@ import SectionTitile from "../../../components/sectionTitle/SectionTitile";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { FaTrash } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import useAuth from "../../../hooks/useAuth";
+// import { useEffect, useState } from "react";
+// import useAuth from "../../../hooks/useAuth";
+import useBooking from "../../../hooks/useBooking";
 
 const MyBooking = () => {
-  const { user } = useAuth();
-  const [bookings, setBookings] = useState([]);
+  // const { user } = useAuth();
+  // const [bookings, setBookings] = useState([]);
+  const [bookings, refetch] = useBooking();
+  console.log(bookings);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/booking?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setBookings(data);
-      });
-  }, [user]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/booking?email=${user?.email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setBookings(data);
+  //     });
+  // }, [user]);
+
   // const [cart, refetch] = useCart();
   // const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
   // TODO: have to delete a booking
   const handleDelete = (item) => {
     Swal.fire({
-      title: "Are you sure you want to Delete?",
+      title: `Are you sure you want to Delete?`,
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -30,13 +34,14 @@ const MyBooking = () => {
       confirmButtonText: " delete!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/booking/${item?._id}`, {
+        fetch(`http://localhost:5000/bookings/${item?._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
+            console.log(data);
             if (data.deletedCount > 0) {
-              // refetch();
+              refetch();
               Swal.fire("Deleted!", "success");
             }
           });
@@ -103,7 +108,7 @@ const MyBooking = () => {
                     {/* <td>$ {item.price}</td> */}
                     <td>
                       <button
-                        onClick={() => handleDelete(item?._id)}
+                        onClick={() => handleDelete(item)}
                         className="btn btn-ghost btn-md bg-red-600 text-white"
                       >
                         <FaTrash />

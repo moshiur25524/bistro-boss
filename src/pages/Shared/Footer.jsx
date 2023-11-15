@@ -1,7 +1,7 @@
 const Footer = () => {
   return (
     <div>
-      <footer className="footer p-10 bg-neutral text-neutral-content">
+      <footer className="footer p-10 bg-neutral text-neutral-content mt-8">
         <div>
           <h1 className="text-7xl text-gray-500 font-[Cinzel]">Bistro Boss</h1>
           <p>

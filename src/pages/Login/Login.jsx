@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import bgLogin from "../../assets/others/authentication.png";
 import loginImage from "../../assets/others/authentication.gif";
 import {
   loadCaptchaEnginge,
@@ -17,7 +16,7 @@ const Login = () => {
   const [disabled, setDisabled] = useState(true);
   const [error, SetError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { signin } = useContext(AuthContext);
+  const { signin, resetPassword } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -86,14 +85,24 @@ const Login = () => {
       setDisabled(false);
     }
   };
+
+  const handleForgetPassword = () => {
+    let email;
+    email = prompt("Enter Your Email");
+    resetPassword(email)
+      .then(() => {
+        if (email) {
+          alert("Check your email");
+        }
+      })
+      .catch((error) => SetError(error.message));
+  };
   return (
     <>
       <Helmet>
         <title>Bistro Boss | Login</title>
       </Helmet>
-      <div
-        className={`hero min-h-screen bg-[url('https://media.istockphoto.com/id/1329481341/vector/yellow-fabric-background.jpg?s=612x612&w=0&k=20&c=KuyQErNo23Y_noWna_7ohNWolQr587FEKXs0w6Ld3fg=')]`}
-      >
+      <div className={`hero min-h-screen bg-white`}>
         <div className="hero-content w-1/2 flex-col lg:flex-row">
           <div className="text-center lg:text-left">
             <img src={loginImage} alt="" />
@@ -137,9 +146,13 @@ const Login = () => {
                 </div>
 
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
+                  <p
+                    onClick={handleForgetPassword}
+                    href="#"
+                    className="label-text-alt link link-hover"
+                  >
                     Forgot password?
-                  </a>
+                  </p>
                 </label>
               </div>
               <div className="form-control">

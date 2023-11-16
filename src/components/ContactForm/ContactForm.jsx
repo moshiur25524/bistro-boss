@@ -8,9 +8,9 @@ import { useRef } from "react";
 
 const ContactForm = () => {
   const { user } = useAuth();
-  const service_id = "service_wbbgl5c";
-  const template_id = "template_s18aq6w";
-  const user_id = "i450Eyy2msOZu4AcZ";
+  const service_id = import.meta.env.VITE_service_id;
+  const template_id = import.meta.env.VITE_template_id;
+  const user_id = import.meta.env.VITE_user_id;
   const form = useRef();
 
   const handleContactForm = async (e) => {
@@ -24,6 +24,9 @@ const ContactForm = () => {
 
     const messages = { name, phone, email, message };
 
+    console.log(messages);
+
+    // -------- send email from user and Receive it --------------
     await emailjs.sendForm(service_id, template_id, form.current, user_id).then(
       (result) => {
         console.log(result.text);
@@ -33,6 +36,7 @@ const ContactForm = () => {
       }
     );
 
+    // ---------- Post contact message to database.------------
     await fetch("http://localhost:5000/contact", {
       method: "POST",
       headers: {
@@ -55,8 +59,6 @@ const ContactForm = () => {
       });
 
     formData.reset();
-
-    console.log(messages);
   };
 
   return (

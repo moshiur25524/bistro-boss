@@ -8,22 +8,9 @@ import { FaTrash } from "react-icons/fa";
 import useBooking from "../../../hooks/useBooking";
 
 const MyBooking = () => {
-  // const { user } = useAuth();
-  // const [bookings, setBookings] = useState([]);
   const [bookings, refetch] = useBooking();
-  console.log(bookings);
+  // console.log(bookings);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/booking?email=${user?.email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setBookings(data);
-  //     });
-  // }, [user]);
-
-  // const [cart, refetch] = useCart();
-  // const totalPrice = cart.reduce((sum, item) => item.price + sum, 0);
-  // TODO: have to delete a booking
   const handleDelete = (item) => {
     Swal.fire({
       title: `Are you sure you want to Delete?`,

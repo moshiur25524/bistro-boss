@@ -5,6 +5,8 @@ import Swal from "sweetalert2";
 import useAuth from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 import Location from "../../../components/Location/Location";
+import { motion } from "framer-motion";
+import { fadeIn } from "../../../variants";
 
 const Reservation = () => {
   const { user } = useAuth();
@@ -52,7 +54,12 @@ const Reservation = () => {
         <title>Bistro Boss | Reservation</title>
       </Helmet>
       <SectionTitile subHeading={"Reservation"} heading={"book a table"} />
-      <form
+
+      <motion.form
+        variants={fadeIn("right", 0.3)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.7 }}
         onSubmit={handleReservation}
         className="card-body grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
       >
@@ -134,7 +141,7 @@ const Reservation = () => {
           />
         </div>
         <CustomButton text={"Book A Table"} Icon={FaClipboardList} />
-      </form>
+      </motion.form>
       <Location />
     </div>
   );

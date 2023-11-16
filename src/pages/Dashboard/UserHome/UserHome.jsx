@@ -4,8 +4,10 @@ import { AiTwotoneStar } from "react-icons/ai";
 import { BsShopWindow } from "react-icons/bs";
 import useAuth from "../../../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import { motion } from "framer-motion";
 // import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { fadeIn } from "../../../variants";
 
 const UserHome = () => {
   const { user } = useAuth();
@@ -17,7 +19,7 @@ const UserHome = () => {
       .then((data) => {
         setStats(data);
       });
-  }, []);
+  }, [user.email]);
 
   // const { data: stats = {} } = useQuery({
   //   queryKey: ["home-stats", user?.email],
@@ -39,7 +41,13 @@ const UserHome = () => {
         <span className="text-[#835D23]">{user?.displayName}</span>
       </h1>
 
-      <div className="flex flex-col md:flex-row justify-center shadow mt-10 w-full">
+      <motion.div
+        variants={fadeIn("down", 0.2)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.7 }}
+        className="flex flex-col md:flex-row justify-center shadow mt-10 w-full gap-8"
+      >
         <div className="stat bg-gradient-to-r text-white from-[#BB34F5] to-[#f5c7f9]">
           <div className="stat-figure ">
             <FaWallet style={{ fontSize: "30px" }} />
@@ -62,9 +70,15 @@ const UserHome = () => {
           <div className=" ">Contact</div>
           <div className="stat-value ">{stats.contactCount}</div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="flex flex-col md:flex-row mt-8">
+      <motion.div
+        variants={fadeIn("right", 0.5)}
+        initial="hidden"
+        whileInView={"show"}
+        viewport={{ once: false, amount: 0.7 }}
+        className="flex flex-col md:flex-row mt-8"
+      >
         <div className="flex flex-col h-[400px] w-full items-center justify-center border-r-0 md:border-r-2  border-orange-900 bg-[#FFEDD5]">
           <div>
             <img
@@ -102,7 +116,7 @@ const UserHome = () => {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };
